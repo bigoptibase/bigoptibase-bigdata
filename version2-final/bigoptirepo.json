@@ -1,0 +1,6 @@
+{
+  "slug" : "bigoptibase",
+  "name" : "BigOptiBase repository",
+  "description" : "BigOptiBase project data repository",
+  "dbname" : "bigopti_db"
+}
