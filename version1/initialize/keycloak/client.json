@@ -1,0 +1,104 @@
+{
+	"clientId":"bda_client",
+	"surrogateAuthRequired":false,
+	"enabled":true,
+	"clientAuthenticatorType":"client-secret",
+	"redirectUris":[],
+	"webOrigins":[],
+	"notBefore":0,
+	"bearerOnly":false,
+	"consentRequired":false,
+	"standardFlowEnabled":true,
+	"implicitFlowEnabled":true,
+	"directAccessGrantsEnabled":true,
+	"serviceAccountsEnabled":true,
+	"authorizationServicesEnabled":true,
+	"redirectUris":["/api/*"],
+	"publicClient":false,
+	"secret":"bda_secret",
+	"frontchannelLogout":false,
+	"protocol":"openid-connect",
+	"authorizationSettings": {
+		"allowRemoteResourceManagement": true,
+		"policyEnforcementMode": "ENFORCING",
+		"resources": [
+		{
+			"name": "Admin API resource",
+			"ownerManagedAccess": false,
+			"displayName": "Admin API resource",
+			"attributes": {},
+			"uris": [
+				"/xengines*",
+			"/sharedrecipes/*",
+			"/jobs/*",
+			"/datastore*",
+			"/xlanguages*",
+			"/connectors/*",
+			"/recipes/*",
+			"/messages/**",
+			"/datastore/*/schema*",
+			"/datastore/*/boot*",
+			"/datastore/*/dtable?*"
+			]
+		},
+		{
+			"name": "BigOptiBase resource",
+			"ownerManagedAccess": false,
+			"displayName": "BigOptiBase resource",
+			"attributes": {},
+			"uris": [
+				"/datastore/bigoptibase",
+				"/kpi/bigoptibase/**",
+				"/datastore/bigoptibase/select*",
+				"/datastore/bigoptibase/entries*",
+				"/datastore/bigoptibase/",
+				"/datastore/bigoptibase/dtable*"
+			]
+		}
+		],
+		"policies": [
+			{
+				"name": "Admin policy",
+				"type": "role",
+				"logic": "POSITIVE",
+				"decisionStrategy": "UNANIMOUS",
+				"config": {
+					"roles": "[{\"id\":\"admin\",\"required\":false}]"
+				}
+			},
+			{
+				"name": "Admin permission",
+				"type": "resource",
+				"logic": "POSITIVE",
+				"decisionStrategy": "UNANIMOUS",
+				"config": {
+					"resources": "[\"Admin API resource\"]",
+					"applyPolicies": "[\"Admin policy\"]"
+				}
+			},
+			{
+				"name": "BigOptiBase policy",
+				"type": "role",
+				"logic": "POSITIVE",
+				"decisionStrategy": "UNANIMOUS",
+				"config": {
+					"roles": "[{\"id\":\"bigoptibase_user\",\"required\":false}]"
+				}
+			},
+			{
+				"name": "BigOptiBase permission",
+				"type": "resource",
+				"logic": "POSITIVE",
+				"decisionStrategy": "UNANIMOUS",
+				"config": {
+					"resources": "[\"BigOptiBase resource\"]",
+					"applyPolicies": "[\"BigOptiBase policy\"]"
+				}
+			}
+
+		],
+		"scopes": []
+	}
+}
+
+
